@@ -26,7 +26,18 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-
+  
+  <distributionManagement>
+   <snapshotRepository>
+      <id>nexus-deployment-repo</id>
+      <url>http://localhost:8081/repository/Snapshots/</url>
+   </snapshotRepository>
+   <repository>
+      <id>nexus-deployment-repo</id>
+      <url>http://localhost:8081/repository/Releases/</url>
+   </repository>
+  </distributionManagement>
+ 
   <build>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
@@ -68,6 +79,14 @@
         <plugin>
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
+        </plugin>
+		<plugin>
+		  <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>3.0.0-M1</version>
+		  <configuration>
+            <tagBase>http://localhost:8081/repository/Releases/</tagBase>
+        </configuration>
         </plugin>
       </plugins>
     </pluginManagement>
